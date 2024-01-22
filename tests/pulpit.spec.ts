@@ -24,7 +24,7 @@ test.describe('Pulpit tests', () => {
 
     await page.getByRole('button', { name: 'wykonaj' }).click();
     await page.getByTestId('close-button').click();
-    
+
     // Assert
     await expect(page.locator('#show_messages')).toHaveText(
       `Przelew wykonany! ${expectedTransferReceiver} - ${transferAmount},00PLN - ${transferTitle}`,
@@ -49,8 +49,6 @@ test.describe('Pulpit tests', () => {
     await page.getByTestId('close-button').click();
 
     // Assert
-    await expect(page.locator('#show_messages')).toHaveText(
-      expectedMessage,
-    );
+    await expect(page.locator('#show_messages')).toHaveText(expectedMessage);
   });
 });
