@@ -7,6 +7,7 @@ test.describe('Pulpit tests', () => {
     const url = 'https://demo-bank.vercel.app/'
     const userLogin = 'testerLO';
     const userPassword = 'test1234';
+    const receiverId = '2';
     const transferAmount = '150';
     const transferTitle = 'pizza';
     const expectedTransferReceiver = 'Chuck Demobankowy'
@@ -16,7 +17,7 @@ test.describe('Pulpit tests', () => {
     await page.getByTestId('login-input').fill(userLogin);
     await page.getByTestId('password-input').fill(userPassword);
     await page.getByTestId('login-button').click();
-    await page.locator('#widget_1_transfer_receiver').selectOption('2');
+    await page.locator('#widget_1_transfer_receiver').selectOption(receiverId);
     await page.locator('#widget_1_transfer_amount').fill(transferAmount);
     await page.locator('#widget_1_transfer_title').fill(transferTitle);
 
