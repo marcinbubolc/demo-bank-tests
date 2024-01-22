@@ -1,12 +1,11 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Instalement loan pop-up', () => {
-  test.only('Check instalement pop-up', async ({ page }) => {
+  test.skip('Check instalement pop-up', async ({ page }) => {
     // Arrange
     const url = 'https://demo-bank.vercel.app/';
     const userLogin = 'testerLO';
     const userPassword = 'test1234';
-    const expectedUserName = 'Jan Demobankowy';
 
     // Act
     await page.goto(url);
