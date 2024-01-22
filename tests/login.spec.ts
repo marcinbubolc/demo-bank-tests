@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('User login to Demobank', () => {
+  const url = 'https://demo-bank.vercel.app/'
 
   test('login with correct credentials', async ({ page }) => {
     // Arrange
-    const url = 'https://demo-bank.vercel.app/'
     const userLogin = 'testerLO';
     const userPassword = 'test1234';
     const expectedUserName = 'Jan Demobankowy';
@@ -19,7 +19,7 @@ test.describe('User login to Demobank', () => {
   });
 
   test('unsuccessful login with too short login', async ({ page }) => {
-    await page.goto('https://demo-bank.vercel.app/');
+    await page.goto(url);
     await page.getByTestId('login-input').fill('tester');
     await page.getByTestId('password-input').click();
 
@@ -27,7 +27,7 @@ test.describe('User login to Demobank', () => {
   });
 
   test('unsuccessful login with too short password', async ({ page }) => {
-    await page.goto('https://demo-bank.vercel.app/');
+    await page.goto(url);
     await page.getByTestId('login-input').fill('testerlo');
     await page.getByTestId('password-input').fill('test');
     await page.getByTestId('password-input').blur();
