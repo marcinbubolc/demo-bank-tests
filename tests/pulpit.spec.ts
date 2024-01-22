@@ -42,5 +42,6 @@ test.describe('Pulpit tests', () => {
     await page.getByTestId('close-button').click();
 
     await expect(page.locator('#show_messages')).toHaveText('Doładowanie wykonane! 50,00PLN na numer 502 xxx xxx');
+    console.log("Testowa treść do zalogowania w konsoli");
   });
 });
