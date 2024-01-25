@@ -1,52 +1,55 @@
 import { test, expect } from '@playwright/test';
+import { loginData } from '../test-data/login.data';
 
 test.describe('User login to Demobank', () => {
-  // Arrange
-  const userLogin = 'testerLO';
-  const userPassword = 'test1234';
-  const expectedUserName = 'Jan Demobankowy';
-
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
-  })
+  });
 
-  test('login with correct credentials', async ({ page }) => {
+  test('successful login with correct credentials', async ({ page }) => {
+    // Arrange
+    const userId = loginData.userId;
+    const userPassword = loginData.userPassword;
+    const expectedUserName = 'Jan Demobankowy';
+
     // Act
-    await page.getByTestId('login-input').fill(userLogin);
+    await page.getByTestId('login-input').fill(userId);
     await page.getByTestId('password-input').fill(userPassword);
     await page.getByTestId('login-button').click();
+
     // Assert
     await expect(page.getByTestId('user-name')).toHaveText(expectedUserName);
   });
 
-  test('unsuccessful login with too short login', async ({ page }) => {
-    //Arrange
+  test('unsuccessful login with too short username', async ({ page }) => {
+    // Arrange
+    const incorrectUserId = 'tester';
     const expectedErrorMessage = 'identyfikator ma min. 8 znaków';
-    const incorrectUsername = 'tester';
 
-    //Act
-    await page.getByTestId('login-input').fill(incorrectUsername);
+    // Act
+    await page.getByTestId('login-input').fill(incorrectUserId);
     await page.getByTestId('password-input').click();
 
-    //Assert
+    // Assert
     await expect(page.getByTestId('error-login-id')).toHaveText(
-      expectedErrorMessage,
+      expectedErrorMessage
     );
   });
 
   test('unsuccessful login with too short password', async ({ page }) => {
-    //Arrange
+    // Arrange
+    const userId = loginData.userId;
+    const incorrectPassword = '1234';
     const expectedErrorMessage = 'hasło ma min. 8 znaków';
-    const incorrectPassword = 'test';
 
-    //Act
-    await page.getByTestId('login-input').fill(userLogin);
+    // Act
+    await page.getByTestId('login-input').fill(userId);
     await page.getByTestId('password-input').fill(incorrectPassword);
     await page.getByTestId('password-input').blur();
 
-    //Assert
+    // Assert
     await expect(page.getByTestId('error-login-password')).toHaveText(
-      expectedErrorMessage,
+      expectedErrorMessage
     );
   });
 });

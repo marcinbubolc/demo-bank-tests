@@ -4,15 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright",
-    "test: headed": "npx playwright"
-
+    "test": "npx playwright test",
+    "test:pulpit:headed": "npm run test tests/pulpit.spec.ts -- --headed",
+    "test:headed": "npx playwright test --headed"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.31.2",
-    "prettier": "3.2.4"
+    "@playwright/test": "^1.32.1",
+    "prettier": "2.8.4"
   }
 }
