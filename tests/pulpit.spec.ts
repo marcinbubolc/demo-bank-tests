@@ -21,9 +21,9 @@ test.describe('Pulpit tests', () => {
     const transferAmount = '150';
     const transferTitle = 'pizza';
     const expectedTransferReceiver = 'Chuck Demobankowy';
-    const pulpitPage = new PulpitPage(page);
-
+    
     // Act
+    const pulpitPage = new PulpitPage(page);
     await pulpitPage.transferReceiverField.selectOption(receiverId);
     await pulpitPage.transferAmountField.fill(transferAmount);
     await pulpitPage.transferTitle.fill(transferTitle);
@@ -42,9 +42,9 @@ test.describe('Pulpit tests', () => {
     const topUpReceiver = '500 xxx xxx';
     const topUpAmount = '50';
     const expectedMessage = `Doładowanie wykonane! ${topUpAmount},00PLN na numer ${topUpReceiver}`;
-    const pulpitPage = new PulpitPage(page);
-
+    
     // Act
+    const pulpitPage = new PulpitPage(page);
     await pulpitPage.topUpReceiverField.selectOption(topUpReceiver);
     await pulpitPage.topUpAmountField.fill(topUpAmount);
     await pulpitPage.topUpAgreementField.click();
@@ -62,7 +62,7 @@ test.describe('Pulpit tests', () => {
     const topUpAmount = '50';
     const initialBalance = await pulpitPage.moneyValueField.innerText();
     const expectedBalance = Number(initialBalance) - Number(topUpAmount);
-
+    
     // Act
     await pulpitPage.topUpReceiverField.selectOption(topUpReceiver);
     await pulpitPage.topUpAmountField.fill(topUpAmount);

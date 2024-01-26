@@ -22,8 +22,9 @@ test.describe('Payment tests', () => {
     const transferAccount = '12 3456 7890 1234 5678 9012 34568';
     const transferAmount = '222';
     const expectedMessage = `Przelew wykonany! ${transferAmount},00PLN dla Jan Nowak`;
-    const paymentPage = new PaymentPage(page);
+    
     // Act
+    const paymentPage = new PaymentPage(page);
     await paymentPage.transferReceiver.fill(transferReceiver);
     await paymentPage.transferAccount.fill(transferAccount);
     await paymentPage.transferAmount.fill(transferAmount);
