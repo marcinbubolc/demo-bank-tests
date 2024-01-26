@@ -19,4 +19,5 @@ export class PulpitPage {
   moneyValueField = this.page.locator('#money_value');
 
   expectedMessageField = this.page.locator('#show_messages');
+  loginField = this.page.getByTestId('user-name');
 }
