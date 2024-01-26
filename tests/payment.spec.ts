@@ -4,14 +4,16 @@ import { LoginPage } from '../pages/login.page';
 import { PaymentPage } from '../pages/payment.page';
 
 test.describe('Payment tests', () => {
+  let loginPage: LoginPage;
+  let paymentPage: PaymentPage;
+
   test.beforeEach(async ({ page }) => {
     const userId = loginData.userId;
     const userPassword = loginData.userPassword;
-    const paymentPage = new PaymentPage(page);
-
+    paymentPage = new PaymentPage(page);
 
     await page.goto('/');
-    const loginPage = new LoginPage(page);
+    loginPage = new LoginPage(page);
 
     await loginPage.loginInput.fill(userId);
     await loginPage.passwordInput.fill(userPassword);
@@ -20,7 +22,6 @@ test.describe('Payment tests', () => {
   });
 
   test('simple payment', async ({ page }) => {
-    const paymentPage = new PaymentPage(page);
     // Arrange
     const transferReceiver = 'Jan Nowak';
     const transferAccount = '12 3456 7890 1234 5678 9012 34568';
