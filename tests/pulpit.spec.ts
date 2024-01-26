@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { loginData } from '../test-data/login.data';
 import { LoginPage } from '../pages/login.page';
+import { PulpitPage } from '../pages/pulpit.page';
 
 test.describe('Pulpit tests', () => {
   test.beforeEach(async ({ page }) => {
@@ -20,17 +21,18 @@ test.describe('Pulpit tests', () => {
     const transferAmount = '150';
     const transferTitle = 'pizza';
     const expectedTransferReceiver = 'Chuck Demobankowy';
+    const pulpitPage = new PulpitPage(page);
 
     // Act
-    await page.locator('#widget_1_transfer_receiver').selectOption(receiverId);
-    await page.locator('#widget_1_transfer_amount').fill(transferAmount);
-    await page.locator('#widget_1_transfer_title').fill(transferTitle);
+    await pulpitPage.transferReceiverField.selectOption(receiverId);
+    await pulpitPage.transferAmountField.fill(transferAmount);
+    await pulpitPage.transferTitle.fill(transferTitle);
 
-    await page.getByRole('button', { name: 'wykonaj' }).click();
-    await page.getByTestId('close-button').click();
+    await pulpitPage.makeTransferButton.click();
+    await pulpitPage.closeButton.click();
 
     // Assert
-    await expect(page.locator('#show_messages')).toHaveText(
+    await expect(pulpitPage.expectedMessageField).toHaveText(
       `Przelew wykonany! ${expectedTransferReceiver} - ${transferAmount},00PLN - ${transferTitle}`
     );
   });
