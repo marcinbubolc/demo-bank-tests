@@ -14,9 +14,7 @@ test.describe('Pulpit tests', () => {
     await page.goto('/');
     loginPage = new LoginPage(page);
     pulpitPage = new PulpitPage(page);
-    await loginPage.loginInput.fill(userId);
-    await loginPage.passwordInput.fill(userPassword);
-    await loginPage.loginButton.click();
+    await loginPage.login(userId, userPassword);
   });
   
   test('quick payment with correct data', async ({ page }) => {

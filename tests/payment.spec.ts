@@ -11,13 +11,11 @@ test.describe('Payment tests', () => {
     const userId = loginData.userId;
     const userPassword = loginData.userPassword;
     paymentPage = new PaymentPage(page);
-
-    await page.goto('/');
     loginPage = new LoginPage(page);
 
-    await loginPage.loginInput.fill(userId);
-    await loginPage.passwordInput.fill(userPassword);
-    await loginPage.loginButton.click();
+    await page.goto('/');
+
+    await loginPage.login(userId, userPassword);
     await paymentPage.sideMenu.goToPaymentPage.click();
   });
 
