@@ -20,4 +20,25 @@ export class PulpitPage {
 
   expectedMessageField = this.page.locator('#show_messages');
   loginField = this.page.getByTestId('user-name');
+
+  async quickPayment(
+    receiverId: string,
+    transferAmount: string,
+    transferTitle: string,
+  ): Promise<void> {
+    await this.transferReceiverField.selectOption(receiverId);
+    await this.transferAmountField.fill(transferAmount);
+    await this.transferTitle.fill(transferTitle);
+
+    await this.makeTransferButton.click();
+    await this.closeButton.click();
+  }
+
+  async topUpMethod(topUpReceiver: string, topUpAmount: string): Promise<void> {
+    await this.topUpReceiverField.selectOption(topUpReceiver);
+    await this.topUpAmountField.fill(topUpAmount);
+    await this.topUpAgreementField.click();
+    await this.topUpConfirmButton.click();
+    await this.closeButton.click();
+  }
 }
