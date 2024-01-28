@@ -40,7 +40,7 @@ test.describe('Pulpit tests', () => {
     const expectedMessage = `Doładowanie wykonane! ${topUpAmount},00PLN na numer ${topUpReceiver}`;
 
     // Act
-    await pulpitPage.topUpMethod(topUpReceiver, topUpAmount);
+    await pulpitPage.executeTopUp(topUpReceiver, topUpAmount);
 
     // Assert
     await expect(pulpitPage.expectedMessageField).toHaveText(expectedMessage);
@@ -54,7 +54,7 @@ test.describe('Pulpit tests', () => {
     const expectedBalance = Number(initialBalance) - Number(topUpAmount);
 
     // Act
-    await pulpitPage.topUpMethod(topUpReceiver, topUpAmount);
+    await pulpitPage.executeTopUp(topUpReceiver, topUpAmount);
 
     // Assert
     await expect(pulpitPage.moneyValueField).toHaveText(`${expectedBalance}`);

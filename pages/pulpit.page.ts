@@ -29,12 +29,11 @@ export class PulpitPage {
     await this.transferReceiverField.selectOption(receiverId);
     await this.transferAmountField.fill(transferAmount);
     await this.transferTitle.fill(transferTitle);
-
     await this.makeTransferButton.click();
     await this.closeButton.click();
   }
 
-  async topUpMethod(topUpReceiver: string, topUpAmount: string): Promise<void> {
+  async executeTopUp(topUpReceiver: string, topUpAmount: string): Promise<void> {
     await this.topUpReceiverField.selectOption(topUpReceiver);
     await this.topUpAmountField.fill(topUpAmount);
     await this.topUpAgreementField.click();
