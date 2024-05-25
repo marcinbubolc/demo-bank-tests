@@ -2,15 +2,18 @@ import { test, expect } from '@playwright/test';
 import { loginData } from '../test-data/login.data';
 import { LoginPage } from '../pages/login.page';
 import { PulpitPage } from '../pages/pulpit.page';
+import { LogoutPage } from '../pages/logout.page';
 
 test.describe('User login to Demobank', () => {
   let loginPage: LoginPage;
   let pulpitPage: PulpitPage;
+  let logoutPage: LogoutPage;
 
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
     loginPage = new LoginPage(page);
     pulpitPage = new PulpitPage(page);
+    logoutPage = new LogoutPage(page);
   });
 
   test('successful login with correct credentials', async ({ page }) => {
@@ -53,4 +56,17 @@ test.describe('User login to Demobank', () => {
     // Assert
     await expect(loginPage.passwordError).toHaveText(expectedErrorMessage);
   });
+  test('successul logut', async ({ page }) => {
+    const userId = loginData.userId;
+    const userPassword = loginData.userPassword;
+    const expectedUserName = 'Jan Demobankowy';
+
+    // Act
+    await loginPage.login(userId, userPassword);
+
+    // Assert
+    await expect(pulpitPage.loginField).toHaveText(expectedUserName);
+    await logoutPage.logout();
+    console.log("Test finished successfully.");
+  })
 });
